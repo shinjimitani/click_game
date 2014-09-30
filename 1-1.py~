@@ -82,19 +82,17 @@ canvas4=tkinter.Canvas(tk,width=CANVAS_WIDTH,height=CANVAS_HEIGHT)
 
 # ラベル変更
 class Change:
-#	loop=1     #ループ用 1-4
+	loop=1     #ループ用 1-4
 
-#	t=3000 #time 
-	t=500
+	t=3000 #time 
+#	t=500
 
-#	status=1 #(1,2,3)1:画面１　2:画面２　3:画面２でストップ
+	status=1 #(1,2,3)1:画面１　2:画面２　3:画面２でストップ
 
 	def __init__(self):
 	#初期
 		self.loop=1
 		self.status=1
-		self.msg=[msg1,msg2,msg3,msg4]
-
 		canvas1.create_rectangle(5,5,400,400,fill='#ff0000')
 		canvas1.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg1)
 
@@ -107,35 +105,16 @@ class Change:
 		canvas4.create_rectangle(5,5,400,400,fill='#ffffff')
 		canvas4.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg4)
 
-	def msg(self,status,loop):
-		pass
-		#場面に応じてのメッセージを作成	
-
-		if self.status==1:
-			self.msg=[msg1,msg2,msg3,msg4]
 
 	def status1(self):
 	#画面１でクリック時の処理
-	#処理：loop==1 
-		if self.loop==1:		
-			canvas1.create_rectangle(5,5,400,400,fill='#ff0000')
-			canvas1.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg11)
-
-			canvas2.create_rectangle(5,5,400,400,fill='#ffffff')
-			canvas2.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg12)
-
-			canvas3.create_rectangle(5,5,400,400,fill='#ffffff')
-			canvas3.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg13)
-
-			canvas4.create_rectangle(5,5,400,400,fill='#ffffff')
-			canvas4.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg14)
-
+	#処理：
+		pass
 
 
 	def status2(self):
 	#画面２でクリック時の処理
 	#処理：
-		pass
 	def status3(self):
 	#画面２のストップ時の処理
 	#処理：初期へ戻る
@@ -143,17 +122,14 @@ class Change:
 
 
 	def click(self,ev):
-	
+		pass
 	#クリック時
-	#画面１、画面２、画面３で処理を分ける
-	#self.status=1 or 2 or 3
+	#画面１と画面２の場合で処理を分ける
 
-	
-	#画面1の場合 self.status==1
+
+	#画面1の場合
 	#画面２へ
-		if self.status==1:
-			self.status1()
-
+	#loopを1に
 
 
 	#画面２の場合
@@ -163,19 +139,19 @@ class Change:
 	
 	def canvas1(self,color): 
 		canvas1.create_rectangle(5,5,400,400,fill=color)
-#		canvas1.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg1)
+		canvas1.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg1)
 
 	def canvas2(self,color): 
 		canvas2.create_rectangle(5,5,400,400,fill=color)
-#		canvas2.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg2)
+		canvas2.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg2)
 
 	def canvas3(self,color): 
 		canvas3.create_rectangle(5,5,400,400,fill=color)
-#		canvas3.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg3)
+		canvas3.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg3)
 
 	def canvas4(self,color): 
 		canvas4.create_rectangle(5,5,400,400,fill=color)
-#		canvas4.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg4)
+		canvas4.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg4)
 	
 
 	
@@ -187,27 +163,27 @@ class Change:
 	#loop 1-4
 		if self.loop==1:
 			self.canvas1('#ff0000')
+			self.canvas4('#ffffff')
 			self.canvas2('#ffffff')
-			self.canvas3('#ffffff')
-			self.canvas4('#ffffff')			
+			self.canvas3('#ffffff')			
 	
 		elif self.loop==2:
-			self.canvas1('#ffffff')
-			self.canvas2('#ff0000')
-			self.canvas3('#ffffff')
-			self.canvas4('#ffffff')			
+			self.canvas1('#ff0000')
+			self.canvas4('#ffffff')
+			self.canvas2('#ffffff')
+			self.canvas3('#ffffff')			
 
 		elif self.loop==3:
-			self.canvas1('#ffffff')
+			self.canvas1('#ff0000')
+			self.canvas4('#ffffff')
 			self.canvas2('#ffffff')
-			self.canvas3('#ff0000')
-			self.canvas4('#ffffff')			
+			self.canvas3('#ffffff')			
 
 		elif self.loop==4:
-			self.canvas1('#ffffff')
+			self.canvas1('#ff0000')
+			self.canvas4('#ffffff')
 			self.canvas2('#ffffff')
-			self.canvas3('#ffffff')
-			self.canvas4('#ff0000')			
+			self.canvas3('#ffffff')			
 
 
 	#loop 
