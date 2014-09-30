@@ -96,40 +96,43 @@ class Change:
 		self.msg=[msg1,msg2,msg3,msg4]
 
 		canvas1.create_rectangle(5,5,400,400,fill='#ff0000')
-		canvas1.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg1)
+		canvas1.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=self.msg[0])
 
 		canvas2.create_rectangle(5,5,400,400,fill='#ffffff')
-		canvas2.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg2)
+		canvas2.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=self.msg[1])
 
 		canvas3.create_rectangle(5,5,400,400,fill='#ffffff')
-		canvas3.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg3)
+		canvas3.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=self.msg[2])
 
 		canvas4.create_rectangle(5,5,400,400,fill='#ffffff')
-		canvas4.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg4)
+		canvas4.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=self.msg[3])
 
-	def msg(self,status,loop):
+	def msg(self):
 		pass
 		#場面に応じてのメッセージを作成	
 
 		if self.status==1:
-			self.msg=[msg1,msg2,msg3,msg4]
+			if self.loop==1:
+				self.msg=[msg11,msg12,msg13,msg14]
+		
 
 	def status1(self):
 	#画面１でクリック時の処理
 	#処理：loop==1 
-		if self.loop==1:		
-			canvas1.create_rectangle(5,5,400,400,fill='#ff0000')
-			canvas1.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg11)
+#		if self.loop==1:		
+#			canvas1.create_rectangle(5,5,400,400,fill='#ff0000')
+#			canvas1.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg11)
+#
+#			canvas2.create_rectangle(5,5,400,400,fill='#ffffff')
+#			canvas2.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg12)
 
-			canvas2.create_rectangle(5,5,400,400,fill='#ffffff')
-			canvas2.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg12)
+#			canvas3.create_rectangle(5,5,400,400,fill='#ffffff')
+#			canvas3.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg13)
 
-			canvas3.create_rectangle(5,5,400,400,fill='#ffffff')
-			canvas3.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg13)
+#			canvas4.create_rectangle(5,5,400,400,fill='#ffffff')
+#			canvas4.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg14)
 
-			canvas4.create_rectangle(5,5,400,400,fill='#ffffff')
-			canvas4.create_text(130,130,font=(u'ＭＳ ゴシック', 60),text=msg14)
-
+		pass
 
 
 	def status2(self):
@@ -144,6 +147,8 @@ class Change:
 
 	def click(self,ev):
 	
+		self.msg(self)
+
 	#クリック時
 	#画面１、画面２、画面３で処理を分ける
 	#self.status=1 or 2 or 3
@@ -151,8 +156,8 @@ class Change:
 	
 	#画面1の場合 self.status==1
 	#画面２へ
-		if self.status==1:
-			self.status1()
+	#	if self.status==1:
+	#		self.status1()
 
 
 
@@ -163,19 +168,19 @@ class Change:
 	
 	def canvas1(self,color): 
 		canvas1.create_rectangle(5,5,400,400,fill=color)
-#		canvas1.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg1)
+		canvas1.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=self.msg[0])
 
 	def canvas2(self,color): 
 		canvas2.create_rectangle(5,5,400,400,fill=color)
-#		canvas2.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg2)
+		canvas2.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=self.msg[1])
 
 	def canvas3(self,color): 
 		canvas3.create_rectangle(5,5,400,400,fill=color)
-#		canvas3.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg3)
+		canvas3.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=self.msg[2])
 
 	def canvas4(self,color): 
 		canvas4.create_rectangle(5,5,400,400,fill=color)
-#		canvas4.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=msg4)
+		canvas4.create_text(180,130,font=(u'ＭＳ ゴシック', 100),text=self.msg[3])
 	
 
 	
