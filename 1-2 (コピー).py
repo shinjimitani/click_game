@@ -74,65 +74,107 @@ canvas4=tkinter.Canvas(tk,width=CANVAS_WIDTH,height=CANVAS_HEIGHT)
 
 # ラベル変更
 class Change:
-#	loop=0     #ループ用 0-3
+	loop=0     #ループ用 0-3
 #	t=3000 #time 
 	t=500
-#	status=1 #(1,2,3)1:画面１　2:画面２　3:画面２でストップ
+	status=1 #(1,2,3)1:画面１　2:画面２　3:画面２でストップ
 
 	def __init__(self):
 	#初期
 		self.loop=0
 		self.status=1
 		self.change_msg()
+	#	self.status=2
 
 	def change_msg(self):
 		#場面に応じてのメッセージを作成	
 
 		if self.status==1:
 			self.msg=[msg1,msg2,msg3,msg4]
-
-			self.status==2
+			self.status=2
 
 		elif self.status==2:
 			if self.loop==0:
 				self.msg=[msg11,msg12,msg13,msg14]
-			#	self.loop=1
 			elif self.loop==1:
 				self.msg=[msg21,msg22,msg23,msg24]
-			#	self.loop=1
 			elif self.loop==2:
 				self.msg=[msg31,msg32,msg33,msg34]
-			#	self.loop=1
 			elif self.loop==3:
 				self.msg=[msg41,msg42,msg43,msg44]
-			#	self.loop=1
-			self.loop=1
-			self.status=3
-		 
 		elif self.status==3:
-			__init__(self)
+			print ("st3")
+ 			#loop stop and clear
+		#loop 1-4
+			if self.loop==0:
+				self.canvas1('#ff0000')
+		#	self.canvas2('#ffffff')
+		#	self.canvas3('#ffffff')
+		#	self.canvas4('#ffffff')			
+				canvas2.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas3.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas4.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+
+
+
+
+			elif self.loop==1:
+		#	self.canvas1('#ffffff')
+				self.canvas2('#ff0000')
+				canvas1.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas3.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas4.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+
+	#	self.canvas3('#ffffff')
+		#	self.canvas4('#ffffff')			
+
+			elif self.loop==2:
+		#	self.canvas1('#ffffff')
+		#	self.canvas2('#ffffff')
+				self.canvas3('#ff0000')
+		#	self.canvas4('#ffffff')			
+				canvas1.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas2.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas4.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+
+
+			elif self.loop==3:
+		#	self.canvas1('#ffffff')
+		#	self.canvas2('#ffffff')
+		#	self.canvas3('#ffffff')
+				self.canvas4('#ff0000')			
+				canvas1.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas2.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+				canvas4.create_text(TXT_SIZE,TXT_SIZE,font=(u'ＭＳ ゴシック', 100),text="")
+
+
+			self.loop=5
+
+		elif self.status==4:
+			self.msg=[msg1,msg2,msg3,msg4]
+
 
 
 	def click(self,ev):
 		self.change_msg()
+		print ("loop")
 		print (self.loop)
-
-
-	#クリック
-	#self.status=1 or 2 or 3
-
+		print ("status")
+		print (self.status)
 	
-	#画面1の場合 self.status==1
-	#画面２へ
-	#	if self.status==1:
-	#		self.status1()
+	#status change
+		if self.status==1:
+			self.status=2
+		elif self.status==2:
+			self.status=3
+		elif self.status==3:
+			self.status=4
+		elif self.status==4:
+			self.status=1
 
-
-
-	#画面２の場合
-	#次にクリックされるまでストップ
-
-
+		if self.loop==5:
+			self.loop=0
+	
 	
 	def canvas1(self,color): 
 		canvas1.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill=color)
@@ -188,16 +230,9 @@ class Change:
 			self.canvas4('#ff0000')			
 
 
-	#loop 
-
-	#	if self.loop!=3:
-	#		self.loop +=1
-	#	else:
-	#		self.loop=0
-
-
 ##        #タイマー
-		tk.after(self.t,self.show_time)    
+		if self.loop!=5:
+			tk.after(self.t,self.show_time)    
 
 
 
