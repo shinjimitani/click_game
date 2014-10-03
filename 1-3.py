@@ -29,7 +29,6 @@ msg43='43て'
 msg44='44あし'
 
 
-
 import tkinter
 import time
 tk=tkinter.Tk()
@@ -59,20 +58,19 @@ class Change:
 #	t=3000 #time 
 	t=500
 	status=1 #(1,2,3)1:画面１　2:画面２　3:画面２でストップ
-###############################################################
+	stop_flg=1 #1:go 2:stop
+	
 	def __init__(self):
 	#初期
 		self.nsg_number=1
 		self.status=1
 		self.change_msg()
 	
-###############################################################
 	def change_msg(self):
 		#場面に応じてのメッセージを作成	
 
 		if self.status==1:
 			self.msg=[msg1,msg2,msg3,msg4]
-			print('1111')		
 		elif self.status==2:
 			if self.msg_number==1:
 				self.msg=[msg11,msg12,msg13,msg14]
@@ -85,27 +83,28 @@ class Change:
 			
 				
 	def clear(self):
-		#self.status=4
-		if self.msg_number==1:
+		self.stop_flg=0
+		print("stop")
+		if self.msg_number==2:
 				self.canvas1('#ff0000')
 				#選択以外を消す
 				canvas2.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas3.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas4.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 
-		elif self.msg_number==2:
+		elif self.msg_number==3:
 				self.canvas2('#ff0000')			
 				canvas1.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas3.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas4.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				
-		elif self.msg_number==3:
+		elif self.msg_number==4:
 				self.canvas3('#ff0000')			
 				canvas1.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas2.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas4.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 			
-		elif self.msg_number==4:
+		elif self.msg_number==1:
 				self.canvas4('#ff0000')			
 				canvas2.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas3.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
@@ -113,36 +112,53 @@ class Change:
 			
 
 	def click(self,ev):
-		if self.status==1 and self.status==2: 
+		print ("click")
+		if self.stop_flg==0:
+			self.status=1
+			self.stop_flg=1
+
+		if self.status==1:
+			print(self.status)
+			self.change_msg()
+			self.status=self.status+1
+					
+		elif self.status==2:
+			print("222")
+			self.change_msg()
 			self.status+=1
-			self.change_msg()		
-		elif self.status==3:
-			self.status=4
-			self.clear()	
-		elif self.status==4:
+
+		elif self.status==3: 
+			print("333")
+			self.clear()
 			self.status=1
 	
+#		elif self.status==4:
+#			self.status=1
+	
+	#	if self.stop_flg==0:
+	#		self.stop_flg=1
+
 	def show_time(self):
 
-		if self.msg_number==1:
+		if self.msg_number==1 and self.stop_flg==1:
 			self.canvas1('#ff0000')
 			self.canvas2('#ffffff')
 			self.canvas3('#ffffff')
 			self.canvas4('#ffffff')			
 	
-		elif self.msg_number==2:
+		elif self.msg_number==2 and self.stop_flg==1:
 			self.canvas1('#ffffff')
 			self.canvas2('#ff0000')
 			self.canvas3('#ffffff')
 			self.canvas4('#ffffff')			
 
-		elif self.msg_number==3:
+		elif self.msg_number==3 and self.stop_flg==1:
 			self.canvas1('#ffffff')
 			self.canvas2('#ffffff')
 			self.canvas3('#ff0000')
 			self.canvas4('#ffffff')			
 
-		elif self.msg_number==4:
+		elif self.msg_number==4 and self.stop_flg==1:
 			self.canvas1('#ffffff')
 			self.canvas2('#ffffff')
 			self.canvas3('#ffffff')
@@ -154,8 +170,7 @@ class Change:
 		else:
 			self.msg_number+=1
 		
-		if self.status!=4:
-			tk.after(self.t,self.show_time)   
+		tk.after(self.t,self.show_time)   
 
 
 	def canvas1(self,color): 
