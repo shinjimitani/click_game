@@ -1,55 +1,32 @@
 #coding:utf-8
 
-#クリックコミュニケーションボード
-#場面切替版
 
-#2-1.py
-#初版：2014/10/04
-#
-#スキャン時間
-#t=3000 #time
-t=500
-#
-#####################################
-#メッセージを入力する
-#メニュー
+
+#msg
 msg1='1'
 msg2='2'
 msg3='3'
 msg4='4'
 
-#メニュー以下の階層
-msg11='11' 
-msg12='12'
-msg13='13'
-msg14='14'
+msg11='11あたま' 
+msg12='12おなか'
+msg13='13て'
+msg14='14あし'
 
-msg21='21' 
-msg22='22'
-msg23='23'
-msg24='24'
+msg21='21あたま' 
+msg22='22おなか'
+msg23='23て'
+msg24='24あし'
 
-msg31='31' 
-msg32='32'
-msg33='33'
-msg34='34'
+msg31='31あたま' 
+msg32='32おなか'
+msg33='33て'
+msg34='34あし'
 
-msg41='41' 
-msg42='42'
-msg43='43'
-msg44='44'
-################################################
-#仕様
-#
-#１、左クリックにて操作
-#２、４つのウィンドウ
-#３、画面遷移
-# クリックにて(1)->(2)->(3)->(1)....と遷移する
-# (1) メニュー画面　
-# (2) 「メニュー画面」にて、選択した項目
-# (3) ストップ
-#４、メッセージは、このファイル上部を変更する事
-#################################################
+msg41='41あたま' 
+msg42='42おなか'
+msg43='43て'
+msg44='44あし'
 
 
 import tkinter
@@ -60,12 +37,13 @@ tk=tkinter.Tk()
 #設定項目
 #---------------------------------------------------------------
 #キャンバスのサイズ 
-CANVAS_WIDTH=550 
+CANVAS_WIDTH=450 
 CANVAS_HEIGHT=300
 
-TXT_SIZE=40
-TXT_W=40
+TXT_SIZE=30
+TXT_W=30
 TXT_H=50
+
 #------------------------------------
 
 canvas1=tkinter.Canvas(tk,width=CANVAS_WIDTH,height=CANVAS_HEIGHT)
@@ -77,6 +55,8 @@ canvas4=tkinter.Canvas(tk,width=CANVAS_WIDTH,height=CANVAS_HEIGHT)
 # ラベル変更
 class Change:
 	msg_number=1     #どのメッセージを表示するか 1-4 
+#	t=3000 #time 
+	t=500
 	status=1 #(1,2,3)1:画面１　2:画面２　3:画面２でストップ
 	stop_flg=1 #1:go 2:stop
 	
@@ -84,30 +64,30 @@ class Change:
 	#初期
 		self.nsg_number=1
 		self.status=1
-		self.change_msg(1) #メニューのメッセージ
-		self.status=2	
-	def change_msg(self,s):
-	#statusに応じてのメッセージを作成	
-	#引数
-	#s:status(1 or 2)
-		if s==1:#menu
+		self.change_msg()
+	
+	def change_msg(self):
+		#場面に応じてのメッセージを作成	
+
+		if self.status==1:
 			self.msg=[msg1,msg2,msg3,msg4]
-		elif s==2:#menu にて選択した内容
-			if self.msg_number==2:
+		elif self.status==2:
+			if self.msg_number==1:
 				self.msg=[msg11,msg12,msg13,msg14]
-			elif self.msg_number==3:
+			elif self.msg_number==2:
 				self.msg=[msg21,msg22,msg23,msg24]
+			elif self.msg_number==3:
+				self.msg=[msg31,msg32,msg33,msg34]
 			elif self.msg_number==4:
 				self.msg=[msg31,msg32,msg33,msg34]
-			elif self.msg_number==1:
-				self.msg=[msg41,msg42,msg43,msg44]
 			
 				
 	def clear(self):
-	#画面をストップし選択以外のメッセージを消す	
-		self.stop_flg=0　#スキャンのストップ
+		self.stop_flg=0
+		print("stop")
 		if self.msg_number==2:
 				self.canvas1('#ff0000')
+				#選択以外を消す
 				canvas2.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas3.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas4.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
@@ -128,28 +108,35 @@ class Change:
 				self.canvas4('#ff0000')			
 				canvas2.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 				canvas3.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
-				canvas1.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
+				canvas4.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill='#ffffff')				
 			
 
 	def click(self,ev):
-	#クリック時
-		if self.stop_flg==0:　#スキャンのストップを解除
+		print ("click")
+		if self.stop_flg==0:
 			self.status=1
 			self.stop_flg=1
-		#statusに応じての処理
+
 		if self.status==1:
-			self.change_msg(1)
+			print(self.status)
+			self.change_msg()
 			self.status=self.status+1
 					
 		elif self.status==2:
-			self.change_msg(2)
+			print("222")
+			self.change_msg()
 			self.status+=1
 
 		elif self.status==3: 
+			print("333")
 			self.clear()
 			self.status=1
 	
+#		elif self.status==4:
+#			self.status=1
 	
+	#	if self.stop_flg==0:
+	#		self.stop_flg=1
 
 	def show_time(self):
 
@@ -183,12 +170,12 @@ class Change:
 		else:
 			self.msg_number+=1
 		
-		tk.after(t,self.show_time)   
+		tk.after(self.t,self.show_time)   
 
-　　	#canvasの作成
+
 	def canvas1(self,color): 
 		canvas1.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill=color)
-		canvas1.create_text(TXT_W,TXT_H,font=(u'ＭＳ ゴシック',TXT_SIZE),text=self.msg[0])
+		canvas1.create_text(TXT_W,TXT_H,font=(u'ＭＳ ゴシック', TXT_SIZE),text=self.msg[0])
 
 	def canvas2(self,color): 
 		canvas2.create_rectangle(5,5,CANVAS_WIDTH,CANVAS_HEIGHT,fill=color)
@@ -217,15 +204,6 @@ canvas4.grid(row=1,column=1)
 
 tk.mainloop()
 
-######################
-#メモ#################
-#2014/10/04
-#・もう少し、スッキリとさせる必要あり
-#
-#
-#
-#
-#
-#
+
 
 
